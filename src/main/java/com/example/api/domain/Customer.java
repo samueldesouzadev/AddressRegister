@@ -1,12 +1,9 @@
 package com.example.api.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -23,6 +20,16 @@ public class Customer {
 	@NotEmpty
 	@Email
 	private String email;
+
+	@Column(nullable = false)
+	@NotEmpty
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="customer_address",
+			joinColumns={@JoinColumn(name="address_id",
+					referencedColumnName="id")},
+			inverseJoinColumns={@JoinColumn(name="customer_id",
+					referencedColumnName="id")})
+	private List<Address> addressList;
 
 	public Long getId() {
 		return id;
@@ -48,4 +55,11 @@ public class Customer {
 		this.email = email;
 	}
 
+	public List<Address> getAddressList() {
+		return addressList;
+	}
+
+	public void setAddressList(List<Address> addressList) {
+		this.addressList = addressList;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.api.domain.Customer;
@@ -21,6 +22,11 @@ public class CustomerService {
 
     public List<Customer> findAll() {
         return repository.findAllByOrderByNameAsc();
+    }
+
+    public List<Customer> findAll(int page, int pageSize){
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        return repository.findAll(pageRequest);
     }
 
     public Optional<Customer> findById(Long id) {

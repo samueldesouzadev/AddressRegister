@@ -33,6 +33,12 @@ public class CustomerController {
         return service.findAll();
     }
 
+    @GetMapping(UriMappingConstants.Customer.FINDALL)
+    @ApiOperation(value = "Returns all customers")
+    public List<Customer> findAll(@RequestParam int page, int pageSize) {
+        return service.findAll(page, pageSize);
+    }
+
     @GetMapping(UriMappingConstants.Customer.FINDBYID)
     @ApiOperation(value = "Returns a unique customer")
     public Customer findById(@PathVariable Long id) {
