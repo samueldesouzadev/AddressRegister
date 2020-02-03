@@ -191,14 +191,34 @@
                 <v-card-text class="py-2 white--text text-center">
                     <v-spacer></v-spacer>
                     <v-btn
-                            v-for="icon in icons"
-                            :key="icon"
                             class="mx-4"
                             dark
                             icon
+                            target="_blank" href="https://github.com/samueldesouzadev"
                     >
-                        <v-icon size="24px">{{ icon }}</i></v-icon>
+                        <v-icon size="24px" class="fab fa-github-square"></v-icon>
                     </v-btn>
+                    <v-btn
+                            class="mx-4"
+                            dark
+                            icon
+                            target="_blank" href="https://www.linkedin.com/in/samueldesouza-dev"
+                    >
+                        <v-icon size="24px" class="fab fa-linkedin"></v-icon>
+                    </v-btn>
+                    <v-tooltip right>
+                        <template v-slot:activator="{ on }">
+                            <v-btn
+                                    class="mx-4"
+                                    dark
+                                    icon
+                                    v-on="on"
+                            >
+                                <v-icon size="24px" class="fas fa-envelope"></v-icon>
+                            </v-btn>
+                        </template>
+                        <span>samueldesouza.dev@gmail.com</span>
+                    </v-tooltip>
                     <v-spacer></v-spacer>
                 </v-card-text>
             </v-card>

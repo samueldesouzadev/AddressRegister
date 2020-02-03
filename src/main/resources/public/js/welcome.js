@@ -12,11 +12,6 @@ new Vue({
     vuetify: new Vuetify(),
     data() {
         return {
-            icons: [
-                'fab fa-github-square',
-                'fab fa-linkedin',
-                'fas fa-envelope',
-            ],
             headers: [
                 {text: 'Nome', value: 'name'},
                 {text: 'E-mail', value: 'email'},
