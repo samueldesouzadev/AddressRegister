@@ -3,7 +3,6 @@
 <meta charset="utf-8"/>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
@@ -29,7 +28,8 @@
                         </v-list-item-avatar>
 
                         <v-list-item-content>
-                            <v-list-item-title><p class="font-weight-black">Developer:</p> Samuel de Souza</v-list-item-title>
+                            <v-list-item-title><p class="font-weight-black">Developer:</p> Samuel de Souza
+                            </v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </v-card-actions>
@@ -55,104 +55,105 @@
                             ></v-text-field>
                         </v-col>
                     </v-row>
-                    <v-row>
-                        <v-col cols="12" sm="6" md="3">
-                            <v-text-field
-                                    id="cep"
-                                    v-model="customer.addressList.cep"
-                                    placeholder=" "
-                                    label="CEP"
-                                    :rules="[rules.required]"
-                                    size="10" maxlength="9"
-                                    OnKeyPress="formatar('#####-###', this)"
-                                    @blur="buscacep(customer.addressList.cep)"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="5">
-                            <v-text-field
-                                    id="logradouro"
-                                    v-model="customer.addressList.logradouro"
-                                    placeholder=" "
-                                    label="Rua"
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                                    id="complemento"
-                                    v-model="customer.addressList.complemento"
-                                    placeholder=" "
-                                    label="Complemento"
-                                    required
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" sm="6" md="2">
-                            <v-text-field
-                                    id="numero"
-                                    v-model="customer.addressList.numero"
-                                    placeholder=" "
-                                    label="Número"
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                                    id="bairro"
-                                    v-model="customer.addressList.bairro"
-                                    placeholder=" "
-                                    label="Bairro"
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                                    id="localidade"
-                                    v-model="customer.addressList.localidade"
-                                    placeholder=" "
-                                    label="Localidade"
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="2">
-                            <v-text-field
-                                    id="uf"
-                                    v-model="customer.addressList.uf"
-                                    placeholder=" "
-                                    label="UF"
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                                    id="unidade"
-                                    v-model="customer.addressList.unidade"
-                                    placeholder=" "
-                                    label="Unidade"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                                    id="ibge"
-                                    v-model="customer.addressList.ibge"
-                                    placeholder=" "
-                                    label="Cód.Ibge"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6" md="4">
-                            <v-text-field
-                                    id="gia"
-                                    v-model="customer.addressList.gia"
-                                    placeholder=" "
-                                    label="Gia"
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-
-                    <v-btn class="mr-4" @click="save(customer)" color="green">enviar</v-btn>
+                    <div v-for="address in customer.addressList">
+                        <v-row>
+                            <v-col cols="12" sm="6" md="3">
+                                <v-text-field
+                                        id="cep"
+                                        v-model="address.cep"
+                                        placeholder=" "
+                                        label="CEP"
+                                        :rules="[rules.required]"
+                                        size="10" maxlength="9"
+                                        OnKeyPress="formatar('#####-###', this)"
+                                        @blur="buscacep(address.cep)"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="5">
+                                <v-text-field
+                                        id="logradouro"
+                                        v-model="address.logradouro"
+                                        placeholder=" "
+                                        label="Rua"
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field
+                                        id="complemento"
+                                        v-model="address.complemento"
+                                        placeholder=" "
+                                        label="Complemento"
+                                        required
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" sm="6" md="2">
+                                <v-text-field
+                                        id="numero"
+                                        v-model="address.numero"
+                                        placeholder=" "
+                                        label="Número"
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field
+                                        id="bairro"
+                                        v-model="address.bairro"
+                                        placeholder=" "
+                                        label="Bairro"
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field
+                                        id="localidade"
+                                        v-model="address.localidade"
+                                        placeholder=" "
+                                        label="Localidade"
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="2">
+                                <v-text-field
+                                        id="uf"
+                                        v-model="address.uf"
+                                        placeholder=" "
+                                        label="UF"
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field
+                                        id="unidade"
+                                        v-model="address.unidade"
+                                        placeholder=" "
+                                        label="Unidade"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field
+                                        id="ibge"
+                                        v-model="address.ibge"
+                                        placeholder=" "
+                                        label="Cód.Ibge"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                <v-text-field
+                                        id="gia"
+                                        v-model="address.gia"
+                                        placeholder=" "
+                                        label="Gia"
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </div>
+                    <v-btn class="mr-4" @click="savefetch(customer)" color="green">enviar</v-btn>
 
                 </v-card-text>
             </v-card>
@@ -185,7 +186,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script src="js/welcome.js"></script>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/consumer.js"></script>
+
 </body>
 </html>

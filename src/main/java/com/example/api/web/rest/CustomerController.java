@@ -4,6 +4,8 @@ import com.example.api.domain.Customer;
 import com.example.api.mapping.MessageMappingConstants;
 import com.example.api.mapping.UriMappingConstants;
 import com.example.api.service.CustomerService;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,8 @@ public class CustomerController {
                         MessageMappingConstants.Customer.CUSTOMER_NOT_FOUND));
     }
 
-    @PostMapping(value = UriMappingConstants.Customer.SAVE)
+    @RequestMapping(value = UriMappingConstants.Customer.SAVE, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     @ApiOperation(value = "Save a customer")
     public void save(@RequestBody Customer customer) {
         service.save(customer);
