@@ -1,11 +1,14 @@
 package com.example.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer {
 
 	@Id
@@ -21,8 +24,7 @@ public class Customer {
 	@Email
 	private String email;
 
-	@Column(nullable = false)
-	@NotEmpty
+
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="customer_address",
 			joinColumns={@JoinColumn(name="address_id",

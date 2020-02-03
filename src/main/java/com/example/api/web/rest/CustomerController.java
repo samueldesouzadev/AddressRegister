@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -47,7 +48,7 @@ public class CustomerController {
                         MessageMappingConstants.Customer.CUSTOMER_NOT_FOUND));
     }
 
-    @PostMapping(UriMappingConstants.Customer.SAVE)
+    @PostMapping(value = UriMappingConstants.Customer.SAVE)
     @ApiOperation(value = "Save a customer")
     public void save(@RequestBody Customer customer) {
         service.save(customer);
