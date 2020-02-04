@@ -40,28 +40,26 @@
                 dark
                 max-width="1000"
                 elevation="10"
-                shaped="true"
-                raised="true"
+                shaped
+                raised
         >
             <v-form
                     ref="form"
                     v-model="valid"
                     lazy-validation>
-                <v-card-actions>
-                    <v-list-item class="grow">
-                        <v-list-item-avatar color="blue-grey lighten-4" size="62">
-                            <v-img
-                                    class="elevation-7"
-                                    src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=Black&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light"
-                            ></v-img>
-                        </v-list-item-avatar>
-
-                        <v-list-item-content>
-                            <v-list-item-title><p class="font-weight-black">Developer:</p> Samuel de Souza
-                            </v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </v-card-actions>
+                <row>
+                    <v-card-actions>
+                        <v-list-item class="grow">
+                            <v-list-item-avatar color="grey lighten-2" size="90">
+                                <v-img src="img/avataaars.png"></v-img>
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title><p class="font-weight-black">Developer:</p> Samuel de Souza
+                                </v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-card-actions>
+                </row>
                 <v-card-title class="font-weight-black">Cadastro de cliente</v-card-title>
                 <v-card-text class="headline font-weight-bold">
                     <v-row>
