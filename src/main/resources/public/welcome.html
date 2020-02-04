@@ -10,39 +10,17 @@
 <div id="app">
     <v-app id="inspire">
         </br>
-        <v-alert
-                id="alert"
-                v-model="alert"
-                border="left"
-                close-text="Close Alert"
-                type="success"
+        <v-card
+                class="mx-auto"
+                color="light-blue darken-2"
                 dark
-                dismissible
+                max-width="1000"
+                elevation="10"
         >
-            Cliente salvo com sucesso.
-        </v-alert>
-        <v-alert
-                id="alertError"
-                v-model="alertError"
-                border="left"
-                close-text="Close Alert"
-                type="error"
-                dark
-                dismissible
-        >
-            Erro ao salvar cliente.
-        </v-alert>
-            <v-card
-                    class="mx-auto"
-                    color="light-blue darken-2"
-                    dark
-                    max-width="1000"
-                    elevation="10"
-            >
-                <v-form
-                        ref="form"
-                        v-model="valid"
-                        lazy-validation>
+            <v-form
+                    ref="form"
+                    v-model="valid"
+                    lazy-validation>
                 <v-card-actions>
                     <v-list-item class="grow">
                         <v-list-item-avatar color="blue-grey lighten-4" size="62">
@@ -179,9 +157,34 @@
                         </v-row>
                     </div>
                     <v-btn class="mr-4" @click="save(customer)" color="green">enviar</v-btn>
+                    <div>
+                        <br/>
+                        <v-alert
+                                id="alert"
+                                v-model="alert"
+                                border="left"
+                                close-text="Close Alert"
+                                type="success"
+                                dark
+                                dismissible
+                        >
+                            Cliente salvo com sucesso.
+                        </v-alert>
+                        <v-alert
+                                id="alertError"
+                                v-model="alertError"
+                                border="left"
+                                close-text="Close Alert"
+                                type="error"
+                                dark
+                                dismissible
+                        >
+                            Erro ao salvar cliente.
+                        </v-alert>
+                    </div>
                 </v-card-text>
-                </v-form>
-            </v-card>
+            </v-form>
+        </v-card>
 
         <!--        </br>-->
         <!--        </br>-->
