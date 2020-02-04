@@ -9,7 +9,31 @@
 <body>
 <div id="app">
     <v-app id="inspire">
-        </br>
+        <div>
+            <br/>
+            <v-alert
+                    id="alert"
+                    v-model="alert"
+                    border="left"
+                    close-text="Close Alert"
+                    type="success"
+                    dark
+                    dismissible
+            >
+                Cliente salvo com sucesso.
+            </v-alert>
+            <v-alert
+                    id="alertError"
+                    v-model="alertError"
+                    border="left"
+                    close-text="Close Alert"
+                    type="error"
+                    dark
+                    dismissible
+            >
+                Erro ao salvar cliente.
+            </v-alert>
+        </div>
         <v-card
                 class="mx-auto"
                 color="light-blue darken-2"
@@ -157,31 +181,6 @@
                         </v-row>
                     </div>
                     <v-btn class="mr-4" @click="save(customer)" color="green">enviar</v-btn>
-                    <div>
-                        <br/>
-                        <v-alert
-                                id="alert"
-                                v-model="alert"
-                                border="left"
-                                close-text="Close Alert"
-                                type="success"
-                                dark
-                                dismissible
-                        >
-                            Cliente salvo com sucesso.
-                        </v-alert>
-                        <v-alert
-                                id="alertError"
-                                v-model="alertError"
-                                border="left"
-                                close-text="Close Alert"
-                                type="error"
-                                dark
-                                dismissible
-                        >
-                            Erro ao salvar cliente.
-                        </v-alert>
-                    </div>
                 </v-card-text>
             </v-form>
         </v-card>
