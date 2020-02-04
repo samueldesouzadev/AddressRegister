@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -53,20 +54,37 @@ public class CustomerController {
     @RequestMapping(value = UriMappingConstants.Customer.SAVE, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "Save a customer")
-    public void save(@RequestBody Customer customer) {
-        service.save(customer);
+    public ResponseEntity save(@RequestBody Customer customer) {
+        try{
+            service.save(customer);
+            return new ResponseEntity("Cliente salvo com sucesso", HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity("Erro ao salvar cliente.", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PutMapping(UriMappingConstants.Customer.EDIT)
     @ApiOperation(value = "Edit a customer")
-    public void edit(@RequestBody Customer customer) {
-        service.save(customer);
+    public ResponseEntity edit(@RequestBody Customer customer) {
+        try{
+            service.save(customer);
+            return new ResponseEntity("Cliente foi editado com sucesso", HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity("Erro ao editar cliente.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping(UriMappingConstants.Customer.DELETE)
     @ApiOperation(value = "Delete a customer")
-    public void delete(@RequestBody Customer customer) {
-        service.delete(customer);
+    public ResponseEntity delete(@RequestBody Customer customer) {
+        try{
+            service.delete(customer);
+            return new ResponseEntity("Cliente deletado com sucesso", HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity("Erro ao deletado cliente.", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 

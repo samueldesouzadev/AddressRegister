@@ -12,6 +12,11 @@ new Vue({
     vuetify: new Vuetify(),
     data() {
         return {
+            valid: true,
+            email: 'samueldesouza.dev@gmail.com',
+            alertError: false,
+            alert: false,
+
             headers: [
                 {text: 'Nome', value: 'name'},
                 {text: 'E-mail', value: 'email'},
@@ -61,18 +66,19 @@ new Vue({
         buscacep(cep) {
             var self = this;
             let url = "https://viacep.com.br/ws/" + cep + "/json/";
-            axios.get(url).then(function (res) {
-                console.log(res.data);
-                self.customer.addressList[0].bairro = res.data.bairro
-                self.customer.addressList[0].cep = res.data.cep
-                self.customer.addressList[0].complemento = res.data.complemento
-                self.customer.addressList[0].gia = res.data.gia
-                self.customer.addressList[0].ibge = res.data.ibge
-                self.customer.addressList[0].localidade = res.data.localidade
-                self.customer.addressList[0].logradouro = res.data.logradouro
-                self.customer.addressList[0].uf = res.data.uf
-                self.customer.addressList[0].unidade = res.data.unidade
-            })
+            fetch(url)
+                .then((resp) => resp.json())
+                .then(function (data) {
+                    self.customer.addressList[0].bairro = data.bairro
+                    self.customer.addressList[0].cep = data.cep
+                    self.customer.addressList[0].complemento = data.complemento
+                    self.customer.addressList[0].gia = data.gia
+                    self.customer.addressList[0].ibge = data.ibge
+                    self.customer.addressList[0].localidade = data.localidade
+                    self.customer.addressList[0].logradouro = data.logradouro
+                    self.customer.addressList[0].uf = data.uf
+                    self.customer.addressList[0].unidade = data.unidade
+                })
                 .catch(function (error) {
                     console.log(error)
                 })
@@ -80,37 +86,24 @@ new Vue({
         save(customer) {
             var self = this;
             var url = window.location.href.replace("/welcome.html", "") + "/customer/save";
-            console.log(JSON.stringify(customer));
-            console.log(url);
-            const headers = {
-                'Content-Type': 'application/json'
-            }
-
-            axios.post(url, customer, {
-                headers: headers
-            }).then(function (res) {
-                console.log(res);
-            })
-                .catch(function (error) {
-                    console.log(error)
-                })
-
-        },
-        savefetch(customer) {
-            console.log("ENTROU");
-            var self = this;
-            var url = window.location.href.replace("/welcome.html", "") + "/customer/save";
-            console.log(JSON.stringify(customer));
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(customer),
                 headers: {
                     "Content-Type": "application/json"
                 },
-            }).then((res) => res.json())
-                .then((data) => console.log(data))
+            }).then(function (resp) {
+                console.log(resp);
+                if(resp.status == 200){
+                    self.alertError = false;
+                    self.alert = true;
+                    console.log(self.alert);
+                }else{
+                    self.alertError = true;
+                    self.alert = false;
+                }
+            })
                 .catch((err) => console.log(err))
         },
-
     }
 });
