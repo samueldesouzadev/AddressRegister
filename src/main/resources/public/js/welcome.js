@@ -8,6 +8,7 @@ function formatar(mascara, documento) {
 }
 
 new Vue({
+
     el: '#app',
     vuetify: new Vuetify(),
     data() {
@@ -97,10 +98,12 @@ new Vue({
                 if(resp.status == 200){
                     self.alertError = false;
                     self.alert = true;
+                    $vuetify.goTo('#alert');
                     console.log(self.alert);
                 }else{
                     self.alertError = true;
                     self.alert = false;
+                    $vuetify.goTo('#alertError');
                 }
             })
                 .catch((err) => console.log(err))
