@@ -44,6 +44,8 @@
                                     v-model="customer.name"
                                     placeholder=" "
                                     label="Nome"
+                                    required
+                                    :rules="[rules.required]"
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
@@ -52,6 +54,7 @@
                                     v-model="customer.email"
                                     placeholder=" "
                                     label="E-mail"
+                                    required
                                     :rules="[rules.required, rules.email]"
                             ></v-text-field>
                         </v-col>
@@ -95,6 +98,8 @@
                                                 size="10" maxlength="9"
                                                 OnKeyPress="formatar('#####-###', this)"
                                                 @blur="findCep(address)"
+                                                required
+                                                :rules="[rules.required]"
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="5">
@@ -103,6 +108,8 @@
                                                 v-model="address.logradouro"
                                                 placeholder=" "
                                                 label="Rua"
+                                                required
+                                                :rules="[rules.required]"
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
@@ -111,7 +118,6 @@
                                                 v-model="address.complemento"
                                                 placeholder=" "
                                                 label="Complemento"
-                                                required
                                         ></v-text-field>
                                     </v-col>
                                 </v-row>
@@ -122,6 +128,7 @@
                                                 v-model="address.numero"
                                                 placeholder=" "
                                                 label="Número"
+                                                :rules="[rules.required]"
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
@@ -130,6 +137,8 @@
                                                 v-model="address.bairro"
                                                 placeholder=" "
                                                 label="Bairro"
+                                                required
+                                                :rules="[rules.required]"
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
@@ -138,6 +147,8 @@
                                                 v-model="address.localidade"
                                                 placeholder=" "
                                                 label="Localidade"
+                                                required
+                                                :rules="[rules.required]"
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="2">
@@ -146,6 +157,8 @@
                                                 v-model="address.uf"
                                                 placeholder=" "
                                                 label="UF"
+                                                required
+                                                :rules="[rules.required]"
                                         ></v-text-field>
                                     </v-col>
                                 </v-row>
@@ -179,8 +192,8 @@
                         </v-card>
                         <br/>
                     </div>
-                    <v-btn class="mr-4" @click="save(customer)" color="success">salvar</v-btn>
-                    <v-btn class="mr-4" @click="cleanCustomer(customer)" color="blue-grey">limpar</v-btn>
+                    <v-btn @click="save(customer)" color="success" :disabled="!valid">salvar</v-btn>
+                    <v-btn @click="cleanCustomer(customer)" color="blue-grey">limpar</v-btn>
                 </v-card-text>
             </v-form>
         </v-card>

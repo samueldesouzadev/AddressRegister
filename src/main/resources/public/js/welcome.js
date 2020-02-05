@@ -52,7 +52,7 @@ new Vue({
                 }],
             },
             rules: {
-                required: value => !!value || 'Obrigatório.',
+                required: value => value != '' || 'Obrigatório.',
                 email: value => {
                     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return pattern.test(value) || 'E-mail inválido.'
@@ -68,7 +68,7 @@ new Vue({
             let url = "https://viacep.com.br/ws/" + address.cep + "/json/";
             fetch(url).then((resp) => resp.json()).then(function (data) {
                 console.log(data);
-                if(data.erro == undefined){
+                if (data.erro == undefined) {
                     address.bairro = data.bairro
                     address.complemento = data.complemento
                     address.gia = data.gia
@@ -77,7 +77,7 @@ new Vue({
                     address.logradouro = data.logradouro
                     address.uf = data.uf
                     address.unidade = data.unidade
-                }else{
+                } else {
                     address.bairro = ''
                     address.complemento = ''
                     address.gia = ''
@@ -92,32 +92,37 @@ new Vue({
             })
         },
         save(customer) {
-            console.log(customer);
             var self = this;
-            var url = window.location.href.replace("/welcome.html", "") + "/customer/save";
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(customer),
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            }).then(function (resp) {
-                console.log(resp);
-                if (resp.status == 200) {
-                    self.alert = true;
-                    $vuetify.goTo(target, options)
-                    setTimeout(function () {
-                        self.alert = false;
-                    }, 3000);
-                } else {
-                    self.alertError = true;
-                    document.getElementById(alertError).scrollIntoView();
-                    setTimeout(function () {
-                        self.alertError = false;
-                    }, 3000);
+            if (this.$refs.form.validate()) {
+                this.snackbar = true
+                console.log("ENTROU");
+                console.log(customer);
 
-                }
-            }).catch((err) => console.log(err))
+                var url = window.location.href.replace("/welcome.html", "") + "/customer/save";
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(customer),
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                }).then(function (resp) {
+                    console.log(resp);
+                    if (resp.status == 200) {
+                        self.alert = true;
+                        $vuetify.goTo(target, options)
+                        setTimeout(function () {
+                            self.alert = false;
+                        }, 3000);
+                    } else {
+                        self.alertError = true;
+                        document.getElementById(alertError).scrollIntoView();
+                        setTimeout(function () {
+                            self.alertError = false;
+                        }, 3000);
+
+                    }
+                }).catch((err) => console.log(err))
+            }
         },
         addAddress(index) {
             var self = this;
@@ -134,9 +139,9 @@ new Vue({
                 unidade: ''
             })
         },
-        removeAddress(index){
+        removeAddress(index) {
             var self = this;
-            self.customer.addressList.splice(index,1);
+            self.customer.addressList.splice(index, 1);
         },
         showAlert() {
             const options = {title: 'Info', size: 'sm'}
@@ -145,7 +150,7 @@ new Vue({
                     console.log(res) // {ok: true|false|undefined}
                 })
         },
-        cleanCustomer(customer){
+        cleanCustomer(customer) {
             customer.email = '';
             customer.name = '';
             customer.addressList = [{
