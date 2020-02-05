@@ -47,7 +47,6 @@
                     ref="form"
                     v-model="valid"
                     lazy-validation>
-                <row>
                     <v-card-actions>
                         <v-list-item class="grow">
                             <v-list-item-avatar color="grey lighten-2" size="90">
@@ -59,7 +58,6 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-card-actions>
-                </row>
                 <v-card-title class="font-weight-black">Cadastro de cliente</v-card-title>
                 <v-card-text class="headline font-weight-bold">
                     <v-row>
@@ -82,12 +80,13 @@
                             ></v-text-field>
                         </v-col>
                     </v-row>
-                    <v-card class="mx-auto"
-                            color="light-blue darken-1"
-                            dark
-                            max-width="800"
-                            elevation="10">
-                        <div v-for="address in customer.addressList">
+                    <div v-for="address in customer.addressList">
+                        <v-card class="mx-auto"
+                                color="light-blue darken-1"
+                                dark
+                                max-width="800"
+                                elevation="10">
+
                             <v-col cols="12" sm="6" md="12">
                                 <v-layout row wrap justify-end>
                                     <v-btn
@@ -95,6 +94,7 @@
                                             dark
                                             icon
                                             align-end
+                                            @click="addAddress()"
                                     >
                                         <v-icon size="14px" class="fas fa-plus-circle"></v-icon>
                                     </v-btn>
@@ -109,7 +109,7 @@
                                                 :rules="[rules.required]"
                                                 size="10" maxlength="9"
                                                 OnKeyPress="formatar('#####-###', this)"
-                                                @blur="buscacep(address.cep)"
+                                                @blur="buscacep(address)"
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="5">
@@ -196,8 +196,9 @@
                                     </v-col>
                                 </v-row>
                             </v-col>
-                        </div>
-                    </v-card>
+                        </v-card>
+                        <br/>
+                    </div>
                     <br/>
                     <v-btn class="mr-4" @click="save(customer)" color="green">save</v-btn>
                 </v-card-text>

@@ -64,24 +64,26 @@ new Vue({
     mounted: function () {
     },
     methods: {
-        buscacep(cep) {
+        buscacep(address) {
             var self = this;
-            let url = "https://viacep.com.br/ws/" + cep + "/json/";
+            let url = "https://viacep.com.br/ws/" + address.cep + "/json/";
             fetch(url).then((resp) => resp.json()).then(function (data) {
-                self.customer.addressList[0].bairro = data.bairro
-                self.customer.addressList[0].cep = data.cep
-                self.customer.addressList[0].complemento = data.complemento
-                self.customer.addressList[0].gia = data.gia
-                self.customer.addressList[0].ibge = data.ibge
-                self.customer.addressList[0].localidade = data.localidade
-                self.customer.addressList[0].logradouro = data.logradouro
-                self.customer.addressList[0].uf = data.uf
-                self.customer.addressList[0].unidade = data.unidade
+                address.bairro = data.bairro
+                address.cep = data.cep
+                address.complemento = data.complemento
+                address.gia = data.gia
+                address.ibge = data.ibge
+                address.localidade = data.localidade
+                address.logradouro = data.logradouro
+                address.uf = data.uf
+                address.unidade = data.unidade
+
             }).catch(function (error) {
                 console.log(error)
             })
         },
         save(customer) {
+            console.log(customer);
             var self = this;
             var url = window.location.href.replace("/welcome.html", "") + "/customer/save";
             fetch(url, {
@@ -105,6 +107,21 @@ new Vue({
 
                 }
             }).catch((err) => console.log(err))
+        },
+        addAddress() {
+            var self = this;
+            self.customer.addressList.push({
+                bairro: '',
+                cep: '',
+                complemento: '',
+                gia: '',
+                ibge: '',
+                localidade: '',
+                logradouro: '',
+                numero: '',
+                uf: '',
+                unidade: ''
+            })
         },
     }
 });
