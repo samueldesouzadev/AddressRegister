@@ -80,7 +80,7 @@
                             ></v-text-field>
                         </v-col>
                     </v-row>
-                    <div v-for="address in customer.addressList">
+                    <div v-for="(address, index) in customer.addressList">
                         <v-card class="mx-auto"
                                 color="light-blue darken-1"
                                 dark
@@ -94,7 +94,7 @@
                                             dark
                                             icon
                                             align-end
-                                            @click="addAddress()"
+                                            @click="addAddress(index)"
                                     >
                                         <v-icon size="14px" class="fas fa-plus-circle"></v-icon>
                                     </v-btn>
@@ -199,7 +199,6 @@
                         </v-card>
                         <br/>
                     </div>
-                    <br/>
                     <v-btn class="mr-4" @click="save(customer)" color="green">save</v-btn>
                 </v-card-text>
             </v-form>

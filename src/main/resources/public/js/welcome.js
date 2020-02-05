@@ -108,9 +108,10 @@ new Vue({
                 }
             }).catch((err) => console.log(err))
         },
-        addAddress() {
+        addAddress(index) {
+            console.log(index);
             var self = this;
-            self.customer.addressList.push({
+            self.customer.addressList.splice(index, 0, {
                 bairro: '',
                 cep: '',
                 complemento: '',
