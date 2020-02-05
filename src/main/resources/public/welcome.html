@@ -96,7 +96,16 @@
                                             align-end
                                             @click="addAddress(index)"
                                     >
-                                        <v-icon size="14px" class="fas fa-plus-circle"></v-icon>
+                                        <v-icon class="fas fa-plus-circle"></v-icon>
+                                    </v-btn>
+                                    <v-btn
+                                            class="mx-4"
+                                            dark
+                                            icon
+                                            @click="removeAdd(index)"
+                                            v-if="index > 0"
+                                    >
+                                        <v-icon class="fas fa-trash"></v-icon>
                                     </v-btn>
                                 </v-layout>
                                 <v-row>

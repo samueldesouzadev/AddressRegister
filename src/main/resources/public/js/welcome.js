@@ -8,7 +8,6 @@ function formatar(mascara, documento) {
 }
 
 new Vue({
-
     el: '#app',
     vuetify: new Vuetify(),
     data() {
@@ -96,11 +95,13 @@ new Vue({
                 console.log(resp);
                 if (resp.status == 200) {
                     self.alert = true;
+                    $vuetify.goTo(target, options)
                     setTimeout(function () {
                         self.alert = false;
                     }, 3000);
                 } else {
                     self.alertError = true;
+                    document.getElementById(alertError).scrollIntoView();
                     setTimeout(function () {
                         self.alertError = false;
                     }, 3000);
@@ -109,7 +110,6 @@ new Vue({
             }).catch((err) => console.log(err))
         },
         addAddress(index) {
-            console.log(index);
             var self = this;
             self.customer.addressList.splice(index, 0, {
                 bairro: '',
@@ -124,5 +124,10 @@ new Vue({
                 unidade: ''
             })
         },
+        removeAdd(index){
+            var self = this;
+            self.customer.addressList.splice(index,1);
+        }
     }
 });
+
