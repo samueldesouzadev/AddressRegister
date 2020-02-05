@@ -80,7 +80,7 @@
                                             dark
                                             icon
                                             small
-                                            @click="removeAdd(index)"
+                                            @click="removeAddress(index)"
                                             v-if="index > 0"
                                     >
                                         <v-icon class="fas fa-trash"></v-icon>
@@ -96,7 +96,7 @@
                                                 :rules="[rules.required]"
                                                 size="10" maxlength="9"
                                                 OnKeyPress="formatar('#####-###', this)"
-                                                @blur="buscacep(address)"
+                                                @blur="findCep(address)"
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="5">
@@ -186,71 +186,44 @@
                         </v-card>
                         <br/>
                     </div>
-                    <v-btn class="mr-4" @click="save(customer)" color="green">save</v-btn>
+                    <v-btn class="mr-4" @click="save(customer)" color="success">salvar</v-btn>
+                    <v-btn class="mr-4" @click="cleanCustomer(customer)" color="blue-grey">limpar</v-btn>
                 </v-card-text>
             </v-form>
         </v-card>
-        <v-dialog
-                v-model="alertError"
-                max-width="500px"
-
-        >
+        <v-dialog v-model="alertError" max-width="500px">
             <v-card color="red" dark heigth="300px">
                 <v-card-title>
                     <span><i class="fas fa-exclamation-triangle" style="margin-right: 15px"></i>Erro ao salvar cliente.</span>
                     <v-spacer></v-spacer>
-                    <v-menu
-                            center
-                            left
-                    >
+                    <v-menu center left>
                         <template v-slot:activator="{ on }">
-                            <v-btn
-                                    icon
-                                    @click="alertError = false"
-                            >
+                            <v-btn icon @click="alertError = false">
                                 <v-icon class="fas fa-times"></v-icon>
                             </v-btn>
                         </template>
                         <v-list>
-                            <v-list-item
-                                    v-for="(item, i) in items"
-                                    :key="i"
-                                    @click="() => {}"
-                            >
+                            <v-list-item @click="() => {}">
                             </v-list-item>
                         </v-list>
                     </v-menu>
                 </v-card-title>
             </v-card>
         </v-dialog>
-        <v-dialog
-                v-model="alert"
-                max-width="500px"
-                heigth="100px"
-        >
+        <v-dialog v-model="alert" max-width="500px" heigth="100px">
             <v-card color="green" dark>
                 <v-card-title>
                     <span><i class="fas fa-check-circle"
                              style="margin-right: 15px"></i>Cliente salvo com sucesso.</span>
                     <v-spacer></v-spacer>
-                    <v-menu
-                            center
-                            left
-                    >
+                    <v-menu center left>
                         <template v-slot:activator="{ on }">
-                            <v-btn
-                                    icon
-                                    @click="alert = false"
-                            >
+                            <v-btn icon @click="alert = false">
                                 <v-icon class="fas fa-times"></v-icon>
                             </v-btn>
                         </template>
                         <v-list>
-                            <v-list-item
-                                    v-for="(item, i) in items"
-                                    :key="i"
-                                    @click="() => {}"
-                            >
+                            <v-list-item @click="() => {}">
                             </v-list-item>
                         </v-list>
                     </v-menu>
@@ -259,41 +232,19 @@
         </v-dialog>
         <br/>
         <br/>
-        <v-footer
-                dark
-                padless
-        >
-            <v-card
-                    class="flex"
-                    flat
-                    tile
-            >
+        <v-footer dark padless>
+            <v-card class="flex" flat tile>
                 <v-card-text class="py-2 white--text text-center">
                     <v-spacer></v-spacer>
-                    <v-btn
-                            class="mx-4"
-                            dark
-                            icon
-                            target="_blank" href="https://github.com/samueldesouzadev"
-                    >
+                    <v-btn class="mx-4" dark icon target="_blank" href="https://github.com/samueldesouzadev">
                         <v-icon size="24px" class="fab fa-github-square"></v-icon>
                     </v-btn>
-                    <v-btn
-                            class="mx-4"
-                            dark
-                            icon
-                            target="_blank" href="https://www.linkedin.com/in/samueldesouza-dev"
-                    >
+                    <v-btn class="mx-4" dark icon target="_blank" href="https://www.linkedin.com/in/samueldesouza-dev">
                         <v-icon size="24px" class="fab fa-linkedin"></v-icon>
                     </v-btn>
                     <v-tooltip right>
                         <template v-slot:activator="{ on }">
-                            <v-btn
-                                    class="mx-4"
-                                    dark
-                                    icon
-                                    v-on="on"
-                            >
+                            <v-btn dark icon v-on="on">
                                 <v-icon size="24px" class="fas fa-envelope"></v-icon>
                             </v-btn>
                         </template>
@@ -311,6 +262,5 @@
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-replace-svg></script>
 <script src="js/welcome.js"></script>
-
 </body>
 </html>

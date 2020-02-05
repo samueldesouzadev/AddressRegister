@@ -63,20 +63,30 @@ new Vue({
     mounted: function () {
     },
     methods: {
-        buscacep(address) {
+        findCep(address) {
             var self = this;
             let url = "https://viacep.com.br/ws/" + address.cep + "/json/";
             fetch(url).then((resp) => resp.json()).then(function (data) {
-                address.bairro = data.bairro
-                address.cep = data.cep
-                address.complemento = data.complemento
-                address.gia = data.gia
-                address.ibge = data.ibge
-                address.localidade = data.localidade
-                address.logradouro = data.logradouro
-                address.uf = data.uf
-                address.unidade = data.unidade
-
+                console.log(data);
+                if(data.erro == undefined){
+                    address.bairro = data.bairro
+                    address.complemento = data.complemento
+                    address.gia = data.gia
+                    address.ibge = data.ibge
+                    address.localidade = data.localidade
+                    address.logradouro = data.logradouro
+                    address.uf = data.uf
+                    address.unidade = data.unidade
+                }else{
+                    address.bairro = ''
+                    address.complemento = ''
+                    address.gia = ''
+                    address.ibge = ''
+                    address.localidade = ''
+                    address.logradouro = ''
+                    address.uf = ''
+                    address.unidade = ''
+                }
             }).catch(function (error) {
                 console.log(error)
             })
@@ -124,7 +134,7 @@ new Vue({
                 unidade: ''
             })
         },
-        removeAdd(index){
+        removeAddress(index){
             var self = this;
             self.customer.addressList.splice(index,1);
         },
@@ -134,7 +144,24 @@ new Vue({
                 .then(res => {
                     console.log(res) // {ok: true|false|undefined}
                 })
+        },
+        cleanCustomer(customer){
+            customer.email = '';
+            customer.name = '';
+            customer.addressList = [{
+                bairro: '',
+                cep: '',
+                complemento: '',
+                gia: '',
+                ibge: '',
+                localidade: '',
+                logradouro: '',
+                numero: '',
+                uf: '',
+                unidade: ''
+            }];
         }
+
     }
 });
 
