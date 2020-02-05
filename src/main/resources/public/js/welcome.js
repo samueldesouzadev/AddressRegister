@@ -127,6 +127,13 @@ new Vue({
         removeAdd(index){
             var self = this;
             self.customer.addressList.splice(index,1);
+        },
+        showAlert() {
+            const options = {title: 'Info', size: 'sm'}
+            this.$dialogs.alert('Your message', options)
+                .then(res => {
+                    console.log(res) // {ok: true|false|undefined}
+                })
         }
     }
 });
