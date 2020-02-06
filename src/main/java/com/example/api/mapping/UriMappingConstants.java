@@ -13,8 +13,4 @@ public class UriMappingConstants {
         public static final String EDIT = "/edit";
         public static final String DELETE = "/delete";
     }
-
-    public static final class ViaCepConsumer{
-        public static final String URLBASE = "http://viacep.com.br/ws/";
-    }
 }
