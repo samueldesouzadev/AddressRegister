@@ -13,6 +13,8 @@ new Vue({
     data() {
         return {
             desserts: [],
+            restMethodSuccess: '',
+            restMethodError: '',
             headers: [
                 {text: 'Nome', value: 'name'},
                 {text: 'E-mail', value: 'email'},
@@ -22,7 +24,8 @@ new Vue({
                 {text: 'Rua', value: 'addressList[0].logradouro'},
                 {text: 'Número', value: 'addressList[0].numero'},
                 {text: 'Cód.Ibge', value: 'addressList[0].ibge'},
-                {text: 'Gia', value: 'addressList[0].gia'}
+                {text: 'Gia', value: 'addressList[0].gia'},
+                {text: 'Ações', value: 'action', sortable: false},
             ],
             valid: true,
             email: 'samueldesouza.dev@gmail.com',
@@ -45,7 +48,7 @@ new Vue({
                 }],
             },
             rules: {
-                required: value => value != '' || 'Obrigatório.',
+                required: value => value != undefined || 'Obrigatório.',
                 email: value => {
                     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return pattern.test(value) || 'E-mail inválido.'
@@ -54,19 +57,20 @@ new Vue({
         }
     },
     mounted: function () {
-        var self = this;
-        let url = window.location.href.replace("/welcome.html", "") + "/customer";
-        fetch(url).then((resp) => resp.json()).then(function (data) {
-            console.log(data);
-            self.desserts = data;
-            console.log(self.desserts);
-        }).catch(function (error) {
-            console.log(error)
-        })
+        this.findall();
     },
     methods: {
         findall() {
-
+            var self = this;
+            console.log("ENTROU NO FINDALL");
+            let url = window.location.href.replace("/welcome.html", "") + "/customer";
+            fetch(url).then((resp) => resp.json()).then(function (data) {
+                console.log(data);
+                self.desserts = data;
+                console.log(self.desserts);
+            }).catch(function (error) {
+                console.log(error)
+            })
         },
         findCep(address) {
             var self = this;
@@ -113,21 +117,62 @@ new Vue({
                 }).then(function (resp) {
                     console.log(resp);
                     if (resp.status == 200) {
+                        self.restMethodSuccess = "salvo";
                         self.alert = true;
-                        let url = window.location.href.replace("/welcome.html", "") + "/customer";
-                        fetch(url).then((resp) => resp.json()).then(function (data) {
-                            console.log(data);
-                            self.desserts = data;
-                            console.log(self.desserts);
-                        }).catch(function (error) {
-                            console.log(error)
-                        })
+                        self.findall();
                     } else {
                         self.alertError = true;
-                        document.getElementById(alertError).scrollIntoView();
+                        self.restMethodError = "salvar"
                     }
                 }).catch((err) => console.log(err))
             }
+        },
+        edit(customer) {
+            var self = this;
+            this.snackbar = true
+            console.log("ENTROU SALVAR EDITAR");
+            console.log(customer);
+            var url = window.location.href.replace("/welcome.html", "") + "/customer/edit";
+            fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(customer),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(function (resp) {
+                console.log(resp);
+                if (resp.status == 200) {
+                    self.restMethodSuccess = "editado";
+                    self.alert = true;
+                    self.findall();
+                } else {
+                    self.alertError = true;
+                    self.restMethodError = "editar"
+                }
+            }).catch((err) => console.log(err))
+        },
+        delete(customer){
+            console.log("ENTROU NO DELETE");
+            var self = this;
+            this.snackbar = true
+            var url = window.location.href.replace("/welcome.html", "") + "/customer/delete";
+            fetch(url, {
+                method: 'DELETE',
+                body: JSON.stringify(customer),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(function (resp) {
+                console.log(resp);
+                if (resp.status == 200) {
+                    self.restMethodSuccess = "deletado";
+                    self.alert = true;
+                    self.findall();
+                } else {
+                    self.alertError = true;
+                    self.restMethodError = "deletar"
+                }
+            }).catch((err) => console.log(err))
         },
         addAddress(index) {
             var self = this;
@@ -152,7 +197,7 @@ new Vue({
             const options = {title: 'Info', size: 'sm'}
             this.$dialogs.alert('Your message', options)
                 .then(res => {
-                    console.log(res) // {ok: true|false|undefined}
+                    console.log(res);
                 })
         },
         cleanCustomer(customer) {
@@ -170,8 +215,22 @@ new Vue({
                 uf: '',
                 unidade: ''
             }];
-        }
-
+        },
+        editItem(customer) {
+            var self = this;
+            this.snackbar = true
+            console.log("ENTROU EDITAR");
+            console.log(customer);
+            self.customer = customer;
+        },
+        validateRest(customer){
+            var self = this;
+            if (customer.id != undefined){
+                self.edit(customer);
+            }else{
+                self.save(customer);
+            }
+        },
     }
 });
 

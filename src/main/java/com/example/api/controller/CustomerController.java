@@ -1,4 +1,4 @@
-package com.example.api.web.rest;
+package com.example.api.controller;
 
 import com.example.api.domain.Customer;
 import com.example.api.mapping.MessageMappingConstants;

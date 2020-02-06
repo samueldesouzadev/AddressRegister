@@ -12,8 +12,6 @@
     <v-app id="inspire">
         <v-card
                 class="mx-auto"
-                color="light-blue darken-2"
-                dark
                 max-width="1000"
                 elevation="10"
                 shaped
@@ -24,17 +22,6 @@
                     ref="form"
                     v-model="valid"
                     lazy-validation>
-                <v-card-actions>
-                    <v-list-item class="grow">
-                        <v-list-item-avatar color="grey lighten-2" size="90">
-                            <v-img src="img/avataaars.png"></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-content>
-                            <v-list-item-title><p class="font-weight-black">Developer:</p> Samuel de Souza
-                            </v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </v-card-actions>
                 <v-card-title class="font-weight-black">Cadastro de cliente</v-card-title>
                 <v-card-text class="headline font-weight-bold">
                     <v-row>
@@ -61,8 +48,6 @@
                     </v-row>
                     <div v-for="(address, index) in customer.addressList">
                         <v-card class="mx-auto"
-                                color="light-blue darken-1"
-                                dark
                                 max-width="900"
                                 elevation="10">
 
@@ -75,11 +60,10 @@
                                             @click="addAddress(index)"
                                             small
                                     >
-                                        <v-icon color="white" class="fas fa-plus-circle"></v-icon>
+                                        <v-icon class="fas fa-plus-circle"></v-icon>
                                     </v-btn>
                                     <v-btn
                                             class="mx-4"
-                                            dark
                                             icon
                                             small
                                             @click="removeAddress(index)"
@@ -192,15 +176,15 @@
                         </v-card>
                         <br/>
                     </div>
-                    <v-btn @click="save(customer)" color="success" :disabled="!valid">salvar</v-btn>
-                    <v-btn @click="cleanCustomer(customer)" color="blue-grey">limpar</v-btn>
+                    <v-btn @click="validateRest(customer)" color="success" :disabled="!valid">salvar</v-btn>
+                    <v-btn @click="cleanCustomer(customer)" color="error">limpar</v-btn>
                 </v-card-text>
             </v-form>
         </v-card>
         <v-dialog v-model="alertError" max-width="500px">
             <v-card color="red" dark heigth="300px">
                 <v-card-title>
-                    <span><i class="fas fa-exclamation-triangle" style="margin-right: 15px"></i>Erro ao salvar cliente.</span>
+                    <span><i class="fas fa-exclamation-triangle" style="margin-right: 15px"></i>Erro ao {{restMethodError}} cliente.</span>
                     <v-spacer></v-spacer>
                     <v-menu center left>
                         <template v-slot:activator="{ on }">
@@ -220,7 +204,7 @@
             <v-card color="green" dark>
                 <v-card-title>
                     <span><i class="fas fa-check-circle"
-                             style="margin-right: 15px"></i>Cliente salvo com sucesso.</span>
+                             style="margin-right: 15px"></i>Cliente {{restMethodSuccess}} com sucesso.</span>
                     <v-spacer></v-spacer>
                     <v-menu center left>
                         <template v-slot:activator="{ on }">
@@ -244,14 +228,22 @@
                 elevation="10"
                 float-none
         >
-            <v-data-table :headers="headers" :items="desserts" item-key="name" class="elevation-1"></v-data-table>
+            <v-data-table :headers="headers" :items="desserts" item-key="name" class="elevation-1">
+                <template v-slot:item.action="{ item }">
+<!--                    <v-btn icon  small @click="editItem(item)">-->
+<!--                        <v-icon size="24px" class="fas fa-pen-square"></v-icon>-->
+<!--                    </v-btn>-->
+                    <v-btn icon  small @click="editItem(item)">
+                        <v-icon size="24px" class="fas fa-trash-alt"></v-icon>
+                    </v-btn>
+                </template>
+            </v-data-table>
         </v-card>
         <br/>
         <br/>
         <v-footer dark padless>
             <v-card class="flex" flat tile>
                 <v-card-text class="py-2 white--text text-center">
-                    <v-spacer></v-spacer>
                     <v-btn class="mx-4" dark icon target="_blank" href="https://github.com/samueldesouzadev">
                         <v-icon size="24px" class="fab fa-github-square"></v-icon>
                     </v-btn>
@@ -260,7 +252,7 @@
                     </v-btn>
                     <v-tooltip right>
                         <template v-slot:activator="{ on }">
-                            <v-btn dark icon v-on="on">
+                            <v-btn dark icon v-on="on" class="mx-4" >
                                 <v-icon size="24px" class="fas fa-envelope"></v-icon>
                             </v-btn>
                         </template>

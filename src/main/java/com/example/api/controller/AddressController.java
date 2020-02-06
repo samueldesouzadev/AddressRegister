@@ -1,4 +1,4 @@
-package com.example.api.web.rest;
+package com.example.api.controller;
 
 import org.springframework.stereotype.Controller;
 
