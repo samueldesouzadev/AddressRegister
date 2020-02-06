@@ -151,7 +151,7 @@ new Vue({
                 }
             }).catch((err) => console.log(err))
         },
-        delete(customer){
+        deleteCustomer(customer){
             console.log("ENTROU NO DELETE");
             var self = this;
             this.snackbar = true

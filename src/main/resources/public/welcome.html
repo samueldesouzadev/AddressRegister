@@ -230,10 +230,10 @@
         >
             <v-data-table :headers="headers" :items="desserts" item-key="name" class="elevation-1">
                 <template v-slot:item.action="{ item }">
-<!--                    <v-btn icon  small @click="editItem(item)">-->
-<!--                        <v-icon size="24px" class="fas fa-pen-square"></v-icon>-->
-<!--                    </v-btn>-->
                     <v-btn icon  small @click="editItem(item)">
+                        <v-icon size="24px" class="fas fa-pen-square"></v-icon>
+                    </v-btn>
+                    <v-btn icon  small @click="deleteCustomer(item)">
                         <v-icon size="24px" class="fas fa-trash-alt"></v-icon>
                     </v-btn>
                 </template>
