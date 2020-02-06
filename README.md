@@ -1,5 +1,6 @@
-# api
-Executar aplicação ->
+# API REST
+
+Executar aplicação
 
 
 Entrar na URL: http://localhost:8080/swagger-ui.html > para visualizar a documentação do back-end API.
