@@ -238,6 +238,16 @@
         </v-dialog>
         <br/>
         <br/>
+        <v-card
+                class="mx-auto"
+                max-width="1000"
+                elevation="10"
+                float-none
+        >
+            <v-data-table :headers="headers" :items="desserts" item-key="name" class="elevation-1"></v-data-table>
+        </v-card>
+        <br/>
+        <br/>
         <v-footer dark padless>
             <v-card class="flex" flat tile>
                 <v-card-text class="py-2 white--text text-center">

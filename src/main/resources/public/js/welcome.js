@@ -12,29 +12,22 @@ new Vue({
     vuetify: new Vuetify(),
     data() {
         return {
+            desserts: [],
+            headers: [
+                {text: 'Nome', value: 'name'},
+                {text: 'E-mail', value: 'email'},
+                {text: 'CEP ', value: 'addressList[0].cep'},
+                {text: 'Localidade', value: 'addressList[0].localidade'},
+                {text: 'UF', value: 'addressList[0].uf'},
+                {text: 'Rua', value: 'addressList[0].logradouro'},
+                {text: 'Número', value: 'addressList[0].numero'},
+                {text: 'Cód.Ibge', value: 'addressList[0].ibge'},
+                {text: 'Gia', value: 'addressList[0].gia'}
+            ],
             valid: true,
             email: 'samueldesouza.dev@gmail.com',
             alertError: false,
             alert: false,
-
-            headers: [
-                {text: 'Nome', value: 'name'},
-                {text: 'E-mail', value: 'email'},
-                {text: 'CEP', value: 'cep'},
-            ],
-            desserts: [
-                {
-                    name: 'Samuel',
-                    email: 'samuel@email.com',
-                    cep: '07020-320',
-                },
-                {
-                    name: 'Pedro',
-                    email: 'pedro@email.com',
-                    cep: '07020-320',
-                },
-            ],
-
             customer: {
                 email: '',
                 name: '',
@@ -61,8 +54,20 @@ new Vue({
         }
     },
     mounted: function () {
+        var self = this;
+        let url = window.location.href.replace("/welcome.html", "") + "/customer";
+        fetch(url).then((resp) => resp.json()).then(function (data) {
+            console.log(data);
+            self.desserts = data;
+            console.log(self.desserts);
+        }).catch(function (error) {
+            console.log(error)
+        })
     },
     methods: {
+        findall() {
+
+        },
         findCep(address) {
             var self = this;
             let url = "https://viacep.com.br/ws/" + address.cep + "/json/";
@@ -109,17 +114,17 @@ new Vue({
                     console.log(resp);
                     if (resp.status == 200) {
                         self.alert = true;
-                        $vuetify.goTo(target, options)
-                        setTimeout(function () {
-                            self.alert = false;
-                        }, 3000);
+                        let url = window.location.href.replace("/welcome.html", "") + "/customer";
+                        fetch(url).then((resp) => resp.json()).then(function (data) {
+                            console.log(data);
+                            self.desserts = data;
+                            console.log(self.desserts);
+                        }).catch(function (error) {
+                            console.log(error)
+                        })
                     } else {
                         self.alertError = true;
                         document.getElementById(alertError).scrollIntoView();
-                        setTimeout(function () {
-                            self.alertError = false;
-                        }, 3000);
-
                     }
                 }).catch((err) => console.log(err))
             }
