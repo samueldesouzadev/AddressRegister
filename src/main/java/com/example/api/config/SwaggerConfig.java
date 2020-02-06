@@ -28,7 +28,7 @@ public class SwaggerConfig {
     }
 
     private Predicate<RequestHandler> apis() {
-        return RequestHandlerSelectors.basePackage("com.example.api.web.rest");
+        return RequestHandlerSelectors.basePackage("com.example.api.controller");
     }
 
     private ApiInfo apiInfo() {
