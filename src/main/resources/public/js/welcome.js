@@ -48,7 +48,7 @@ new Vue({
                 }],
             },
             rules: {
-                required: value => value != undefined || 'Obrigatório.',
+                required: value => value != '' || 'Obrigatório.',
                 email: value => {
                     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return pattern.test(value) || 'E-mail inválido.'
@@ -62,12 +62,9 @@ new Vue({
     methods: {
         findall() {
             var self = this;
-            console.log("ENTROU NO FINDALL");
             let url = window.location.href.replace("/welcome.html", "") + "/customer";
             fetch(url).then((resp) => resp.json()).then(function (data) {
-                console.log(data);
                 self.desserts = data;
-                console.log(self.desserts);
             }).catch(function (error) {
                 console.log(error)
             })
@@ -76,7 +73,7 @@ new Vue({
             var self = this;
             let url = "https://viacep.com.br/ws/" + address.cep + "/json/";
             fetch(url).then((resp) => resp.json()).then(function (data) {
-                console.log(data);
+
                 if (data.erro == undefined) {
                     address.bairro = data.bairro
                     address.complemento = data.complemento
@@ -104,9 +101,6 @@ new Vue({
             var self = this;
             if (this.$refs.form.validate()) {
                 this.snackbar = true
-                console.log("ENTROU");
-                console.log(customer);
-
                 var url = window.location.href.replace("/welcome.html", "") + "/customer/save";
                 fetch(url, {
                     method: 'POST',
@@ -115,7 +109,7 @@ new Vue({
                         "Content-Type": "application/json"
                     },
                 }).then(function (resp) {
-                    console.log(resp);
+
                     if (resp.status == 200) {
                         self.restMethodSuccess = "salvo";
                         self.alert = true;
@@ -130,8 +124,7 @@ new Vue({
         edit(customer) {
             var self = this;
             this.snackbar = true
-            console.log("ENTROU SALVAR EDITAR");
-            console.log(customer);
+
             var url = window.location.href.replace("/welcome.html", "") + "/customer/edit";
             fetch(url, {
                 method: 'PUT',
@@ -140,7 +133,7 @@ new Vue({
                     "Content-Type": "application/json"
                 },
             }).then(function (resp) {
-                console.log(resp);
+
                 if (resp.status == 200) {
                     self.restMethodSuccess = "editado";
                     self.alert = true;
@@ -151,8 +144,7 @@ new Vue({
                 }
             }).catch((err) => console.log(err))
         },
-        deleteCustomer(customer){
-            console.log("ENTROU NO DELETE");
+        deleteCustomer(customer) {
             var self = this;
             this.snackbar = true
             var url = window.location.href.replace("/welcome.html", "") + "/customer/delete";
@@ -163,7 +155,7 @@ new Vue({
                     "Content-Type": "application/json"
                 },
             }).then(function (resp) {
-                console.log(resp);
+
                 if (resp.status == 200) {
                     self.restMethodSuccess = "deletado";
                     self.alert = true;
@@ -219,15 +211,13 @@ new Vue({
         editItem(customer) {
             var self = this;
             this.snackbar = true
-            console.log("ENTROU EDITAR");
-            console.log(customer);
             self.customer = customer;
         },
-        validateRest(customer){
+        validateRest(customer) {
             var self = this;
-            if (customer.id != undefined){
+            if (customer.id != undefined) {
                 self.edit(customer);
-            }else{
+            } else {
                 self.save(customer);
             }
         },
