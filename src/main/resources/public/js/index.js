@@ -61,12 +61,13 @@ new Vue({
     },
     methods: {
         findall() {
+            console.log("ENTROU NO BUSCAR");
             var self = this;
-            let url = window.location.href.replace("/welcome.html", "") + "/customer";
+            let url = window.location.href.replace("/register.html", "") + "/customer";
             fetch(url).then((resp) => resp.json()).then(function (data) {
                 self.desserts = data;
             }).catch(function (error) {
-                console.log(error)
+                console.log(error);
             })
         },
         findCep(address) {
@@ -98,10 +99,12 @@ new Vue({
             })
         },
         save(customer) {
+            console.log("ENTROU SALVAR");
             var self = this;
             if (this.$refs.form.validate()) {
                 this.snackbar = true
-                var url = window.location.href.replace("/welcome.html", "") + "/customer/save";
+                var url = window.location.href.replace("/register.html", "") + "/customer/save";
+                console.log(url);
                 fetch(url, {
                     method: 'POST',
                     body: JSON.stringify(customer),
@@ -125,7 +128,7 @@ new Vue({
             var self = this;
             this.snackbar = true
 
-            var url = window.location.href.replace("/welcome.html", "") + "/customer/edit";
+            var url = window.location.href.replace("/register.html", "") + "/customer/edit";
             fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(customer),
@@ -147,7 +150,7 @@ new Vue({
         deleteCustomer(customer) {
             var self = this;
             this.snackbar = true
-            var url = window.location.href.replace("/welcome.html", "") + "/customer/delete";
+            var url = window.location.href.replace("/register.html", "") + "/customer/delete";
             fetch(url, {
                 method: 'DELETE',
                 body: JSON.stringify(customer),
@@ -214,10 +217,13 @@ new Vue({
             self.customer = customer;
         },
         validateRest(customer) {
+            console.log("ENTROU NO VALIDA")
             var self = this;
             if (customer.id != undefined) {
+                console.log("ENTROU NO EDIT")
                 self.edit(customer);
             } else {
+                console.log("ENTROU NO SALVAR")
                 self.save(customer);
             }
         },

@@ -8,11 +8,21 @@
 </head>
 <body>
 <div id="app">
-    <br/>
     <v-app id="inspire">
+        <v-footer dark padless>
+            <v-card class="flex" flat tile color="blue darken-2">
+                <v-card-text class="py-2 white--text text-left">
+                    <v-btn dark icon target="_blank" href="https://vuetifyjs.com/en/">
+                        <v-icon class="fab fa-vuejs"></v-icon>
+                    </v-btn>
+                    Vuetify Project
+                </v-card-text>
+            </v-card>
+        </v-footer>
+        <br/>
         <v-card
                 class="mx-auto"
-                max-width="1000"
+                max-width="1200"
                 elevation="10"
                 shaped
                 raised
@@ -230,10 +240,10 @@
         >
             <v-data-table :headers="headers" :items="desserts" item-key="name" class="elevation-1">
                 <template v-slot:item.action="{ item }">
-                    <v-btn icon  small @click="editItem(item)">
+                    <v-btn icon small @click="editItem(item)">
                         <v-icon size="24px" class="fas fa-pen-square"></v-icon>
                     </v-btn>
-                    <v-btn icon  small @click="deleteCustomer(item)">
+                    <v-btn icon small @click="deleteCustomer(item)">
                         <v-icon size="24px" class="fas fa-trash-alt"></v-icon>
                     </v-btn>
                 </template>
@@ -252,7 +262,7 @@
                     </v-btn>
                     <v-tooltip right>
                         <template v-slot:activator="{ on }">
-                            <v-btn dark icon v-on="on" class="mx-4" >
+                            <v-btn dark icon v-on="on" class="mx-4">
                                 <v-icon size="24px" class="fas fa-envelope"></v-icon>
                             </v-btn>
                         </template>
@@ -269,6 +279,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-replace-svg></script>
-<script src="js/welcome.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>

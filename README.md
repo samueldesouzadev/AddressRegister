@@ -1,9 +1,9 @@
-# API REST
+# API REST - MANUAL
 
-- Executar aplicação
+- Executar classe main ApiApplication.java (Aplicação em Spring Boot)
 
+- URL: http://localhost:8080/swagger-ui.html 
+> Documentação do back-end.
 
-- Entrar na URL: http://localhost:8080/swagger-ui.html > para visualizar a documentação do back-end API.
-
-
-- Entrer na URL: http://localhost:8080/welcome.html > para visualizar o front-end.
+- URL: http://localhost:8080 
+>  front-end.
