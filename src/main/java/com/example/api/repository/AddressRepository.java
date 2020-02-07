@@ -1,6 +1,6 @@
 package com.example.api.repository;
 
-import com.example.api.domain.Address;
+import com.example.api.models.Address;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

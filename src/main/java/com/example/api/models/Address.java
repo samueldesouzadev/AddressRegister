@@ -1,8 +1,7 @@
-package com.example.api.domain;
+package com.example.api.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Entity
 public class Address {

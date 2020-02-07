@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.example.api.domain.Customer;
+import com.example.api.models.Customer;
 import com.example.api.repository.CustomerRepository;
 
 @Service
