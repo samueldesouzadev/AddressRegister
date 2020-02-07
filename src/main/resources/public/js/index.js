@@ -117,6 +117,7 @@ new Vue({
                         self.restMethodSuccess = "salvo";
                         self.alert = true;
                         self.findall();
+                        self.cleanCustomer(self.customer);
                     } else {
                         self.alertError = true;
                         self.restMethodError = "salvar"
@@ -141,6 +142,7 @@ new Vue({
                     self.restMethodSuccess = "editado";
                     self.alert = true;
                     self.findall();
+                    self.cleanCustomer(self.customer);
                 } else {
                     self.alertError = true;
                     self.restMethodError = "editar"
@@ -196,6 +198,7 @@ new Vue({
                 })
         },
         cleanCustomer(customer) {
+            customer.id = '';
             customer.email = '';
             customer.name = '';
             customer.addressList = [{
