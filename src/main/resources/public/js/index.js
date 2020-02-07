@@ -61,7 +61,6 @@ new Vue({
     },
     methods: {
         findall() {
-            console.log("ENTROU NO BUSCAR");
             var self = this;
             let url = window.location.href.replace("/register.html", "") + "/customer";
             fetch(url).then((resp) => resp.json()).then(function (data) {
@@ -99,7 +98,6 @@ new Vue({
             })
         },
         save(customer) {
-            console.log("ENTROU SALVAR");
             var self = this;
             if (this.$refs.form.validate()) {
                 this.snackbar = true
@@ -220,13 +218,10 @@ new Vue({
             self.customer = customer;
         },
         validateRest(customer) {
-            console.log("ENTROU NO VALIDA")
             var self = this;
             if (customer.id != undefined) {
-                console.log("ENTROU NO EDIT")
                 self.edit(customer);
             } else {
-                console.log("ENTROU NO SALVAR")
                 self.save(customer);
             }
         },
